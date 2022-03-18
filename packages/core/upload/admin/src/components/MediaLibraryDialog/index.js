@@ -8,7 +8,7 @@ const Steps = {
   UploadAsset: 'UploadAsset',
 };
 
-export const MediaLibraryDialog = ({ onClose, onSelectAssets, allowedTypes }) => {
+export const MediaLibraryDialog = ({ onClose, onSelectAssets, allowedTypes, multiple }) => {
   const [step, setStep] = useState(Steps.SelectAsset);
 
   if (step === Steps.SelectAsset) {
@@ -18,7 +18,7 @@ export const MediaLibraryDialog = ({ onClose, onSelectAssets, allowedTypes }) =>
         onClose={onClose}
         onValidate={onSelectAssets}
         onAddAsset={() => setStep(Steps.UploadAsset)}
-        multiple
+        multiple={multiple}
       />
     );
   }
@@ -28,9 +28,11 @@ export const MediaLibraryDialog = ({ onClose, onSelectAssets, allowedTypes }) =>
 
 MediaLibraryDialog.defaultProps = {
   allowedTypes: ['files', 'images', 'videos', 'audios'],
+  multiple: true,
 };
 
 MediaLibraryDialog.propTypes = {
+  multiple: PropTypes.bool,
   allowedTypes: PropTypes.arrayOf(PropTypes.string),
   onClose: PropTypes.func.isRequired,
   onSelectAssets: PropTypes.func.isRequired,
